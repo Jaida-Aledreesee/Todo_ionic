@@ -3,6 +3,29 @@ angular.module('todo', ['ionic'])
 .controller('TodoCtrl', function($scope, $ionicModal) {
   // No need for testing data anymore
   $scope.lists = [];
+   $scope.items = {
+    //testing
+      name: 'item1',  
+    }
+
+        $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal
+    })
+
+    $scope.openModal = function() {
+      $scope.modal.show()
+    }
+
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
 
   // Create and load the Modal
   $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
@@ -37,5 +60,7 @@ angular.module('todo', ['ionic'])
 
 
 });
+
+
 
 

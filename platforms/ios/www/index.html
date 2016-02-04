@@ -18,31 +18,27 @@
 
  <!-- Center content -->
   <ion-side-menu-content>
-    <ion-header-bar class="bar-dark">
+    <ion-header-bar class="bar bar-header bar-energized">
       <h1 class="title">Lists</h1>
       <button class="button button-icon ion-plus" ng-click="newTask()">
       </button>
 
   
-    </ion-header-bar>
-    <ion-content>
+  </ion-header-bar>
+  <ion-content>
       <!-- our list and list items -->
-      <ion-list>
-        <ion-item ng-repeat="list in lists">
-          {{list.title}}
-        </ion-item>
-           
-       <!-- New list button-->
-       
-        <div class="row">
-        <div class="col text-center">
-        
-   </div>
-</div>
-      
-      </ion-list>
-
-    </ion-content>
+    <ion-list>
+    <div class="card" >
+     <div class="item item-divider" >
+      Current Lists
+     </div>
+      <!-- Existing Lists-->
+    <div class="item item-text-wrap" ng-repeat="list in lists" ng-click="openModal()">
+      {{list.title}}
+    </div>
+   </div>   
+  </ion-list>
+ </ion-content>
   </ion-side-menu-content>
 
     <!-- Left menu -->
@@ -54,6 +50,8 @@
 
   </ion-side-menus>
 
+
+<!-- Create New List View -->
   <script id="new-task.html" type="text/ng-template">
 
   <div class="modal">
@@ -79,7 +77,7 @@
         <div class="padding">
                 
        
-          <button type="submit" class="button button-block button-positive">Create List</button>
+          <button type="submit" class="button button-block button-energized">Create List</button>
         </div>
       </form>
 
@@ -87,6 +85,25 @@
 
   </div>
 
+</script>
+
+<!-- View details for each list-->
+<script id="templates/contact-modal.html" type="text/ng-template">
+<ion-modal-view >
+    <ion-header-bar>
+      <h1 class="title">List Details</h1>
+    </ion-header-bar>
+    <ion-content>
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Enter todo items</span>
+              <input type="text"> 
+            </label>
+          </div>
+
+          <button class="button button-full button-energized" ng-click="closeModal()">Done</button>
+    </ion-content>
+ </ion-modal-view>
 </script>
 
 </body>

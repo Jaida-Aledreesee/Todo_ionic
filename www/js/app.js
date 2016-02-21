@@ -62,10 +62,10 @@ angular.module('todo', ['ionic'])
      "id":4,"todolistid":1, "name":task.name,"description":"Description of task", "due_date":"1/1/2017","completed":false,"completed_date":null
     });
 
-    var dataObj = {
+    var dataObj = [{
        id:4,todolistid:1, name:task.name,description:"Description of task", due_date:"1/1/2017",completed:false,completed_date:null
        
-    };
+    }]
 
     var res = $http.post('http://skyhi.cloudapp.net:8000/todo', dataObj);
     res.success(function(data, status, headers, config) {

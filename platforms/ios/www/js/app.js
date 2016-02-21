@@ -1,11 +1,52 @@
 angular.module('todo', ['ionic'])
+.factory('Lists', function() {
+  return {
+    all: function() {
+      var projectString = window.localStorage['lists'];
+      if(projectString) {
+        return angular.fromJson(projectString);
+      }
+      return [];
+    },
+    save: function(lists) {
+      window.localStorage['lists'] = angular.toJson(lists);
+    },
+    newList: function(listTitle) {
+      // Add a new list
+      return {
+        title: listTitle,
+        tasks: []
+      };
+    },
+    getLastActiveIndex: function() {
+      return parseInt(window.localStorage['lastActiveProject']) || 0;
+    },
+    setLastActiveIndex: function(index) {
+      window.localStorage['lastActiveProject'] = index;
+    }
+  }
+})
 
-.controller('TodoCtrl', function($scope, $ionicModal) {
+.controller('TodoCtrl', function($scope, $ionicModal,Lists) {
+
+  /**
+ * The Lists factory handles saving and loading lists
+ * from local storage, and also lets us save and load the
+ * last active list index.
+ */
+
+    var createList = function(listTitle) {
+    var newList = Lists.newList(listTitle);
+    $scope.lists.push(newList);
+    Lists.save($scope.lists);
+    $scope.selectList(newList, $scope.lists.length-1);
+  }
+
   // No need for testing data anymore
-  $scope.lists = [];
-   $scope.contact = {
-      name: 'Mittens Cat',
-      info: 'Tap anywhere on the card to open the modal'
+  $scope.lists = Lists.all();
+  $scope.items = {
+    //testing
+      name: 'item1',  
     }
 
         $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
@@ -42,7 +83,10 @@ angular.module('todo', ['ionic'])
       title: task.title
     });
     $scope.taskModal.hide();
+   Lists.save($scope.lists);
+
     task.title = "";
+  
   };
 
 

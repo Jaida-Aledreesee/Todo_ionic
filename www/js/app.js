@@ -18,16 +18,12 @@ angular.module('todo', ['ionic'])
   })
 
 
-
-
-
-
-
   $scope.lists1 = [];
   $scope.items = {
     //testing
       name: 'item1',  
     }
+ 
 
        $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
       scope: $scope,

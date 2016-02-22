@@ -1,14 +1,31 @@
 angular.module('todo', ['ionic'])
 
-.controller('TodoCtrl', function($scope, $ionicModal) {
-  // No need for testing data anymore
-  $scope.lists = [];
-   $scope.contact = {
-      name: 'Mittens Cat',
-      info: 'Tap anywhere on the card to open the modal'
-    }
 
-        $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
+
+
+
+.controller('TodoCtrl', function($scope, $ionicModal,$http) {
+
+  //getting existing lists from json
+
+  $http.get('http://skyhi.cloudapp.net:8000/todolist/_all_records').then(function(resp) {
+    $scope.lists1 = resp.data;
+    $scope.$apply();
+    console.log(resp.data);
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
+
+
+  $scope.lists1 = [];
+  $scope.items = {
+    //testing
+      name: 'item1',  
+    }
+ 
+
+       $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -36,13 +53,29 @@ angular.module('todo', ['ionic'])
   });
 
 
-  // Called when the form is submitted
+
+
+  // Posting new lists to json
+  // This is not working 
   $scope.createTask = function(task) {
-    $scope.lists.push({
-      title: task.title
+    $scope.lists1.rows.push({
+     "id":2,"name":task.name,"description":"Description of todolist", "due_date":"1/1/2017","completed":false,"completed_date":null
     });
+
+    var dataObj = [{
+       id:2, name:task.name,description:"Description of task", due_date:"1/1/2017",completed:false,completed_date:null
+       
+    }]
+
+    var res = $http.post('http://skyhi.cloudapp.net:8000/todolist', dataObj);
+    res.success(function(data, status, headers, config) {
+      $scope.message = data;
+    });
+    res.error(function(data, status, headers, config) {
+      alert( "failure message: " + JSON.stringify({data: data}));
+    }); 
     $scope.taskModal.hide();
-   Lists.save($scope.lists);
+   Lists.save($scope.lists1);
 
     task.title = "";
   

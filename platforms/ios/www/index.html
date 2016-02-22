@@ -30,12 +30,14 @@
     <ion-list>
     <div class="card" >
      <div class="item item-divider" >
-      Current Lists
+      Current Lists 
      </div>
       <!-- Existing Lists-->
-    <div class="item item-text-wrap" ng-repeat="list in lists" ng-click="openModal()">
-      {{list.title}}
+    <div class="item item-text-wrap" ng-repeat="list in lists1.rows" ng-click="openModal()">
+      {{list.name}}
     </div>
+   
+   
    </div>   
   </ion-list>
  </ion-content>
@@ -68,7 +70,7 @@
       <form ng-submit="createTask(task)">
         <div class="list">
           <label class="item item-input">
-            <input type="text" placeholder="List Name" ng-model="task.title">
+            <input type="text" placeholder="List Name" ng-model="task.name">
           </label>
           </br>
           <button class="button button-small">Add People</button>

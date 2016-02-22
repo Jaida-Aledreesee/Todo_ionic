@@ -8,7 +8,7 @@ angular.module('todo', ['ionic'])
 
   //getting existing lists from json
 
-  $http.get('http://skyhi.cloudapp.net:8000/todo/_all_records').then(function(resp) {
+  $http.get('http://skyhi.cloudapp.net:8000/todolist/_all_records').then(function(resp) {
     $scope.lists1 = resp.data;
     $scope.$apply();
     console.log(resp.data);
@@ -59,15 +59,15 @@ angular.module('todo', ['ionic'])
   // This is not working 
   $scope.createTask = function(task) {
     $scope.lists1.rows.push({
-     "id":4,"todolistid":1, "name":task.name,"description":"Description of task", "due_date":"1/1/2017","completed":false,"completed_date":null
+     "id":2,"name":task.name,"description":"Description of todolist", "due_date":"1/1/2017","completed":false,"completed_date":null
     });
 
     var dataObj = [{
-       id:4,todolistid:1, name:task.name,description:"Description of task", due_date:"1/1/2017",completed:false,completed_date:null
+       id:2, name:task.name,description:"Description of task", due_date:"1/1/2017",completed:false,completed_date:null
        
     }]
 
-    var res = $http.post('http://skyhi.cloudapp.net:8000/todo', dataObj);
+    var res = $http.post('http://skyhi.cloudapp.net:8000/todolist', dataObj);
     res.success(function(data, status, headers, config) {
       $scope.message = data;
     });

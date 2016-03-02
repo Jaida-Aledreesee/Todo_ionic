@@ -1,102 +1,108 @@
-angular.module('todo', ['ionic'])
+var app = angular.module("ionicApp", ["ionic"]);
 
+app.config(function($stateProvider, $urlRouterProvider)
+{
+  $urlRouterProvider.otherwise("/help");
 
-
-
-
-.controller('TodoCtrl', function($scope, $ionicModal,$http) {
-
-  //getting existing lists from json
-
-  $http.get('http://skyhi.cloudapp.net:8000/todolist/_all_records').then(function(resp) {
-    $scope.lists1 = resp.data;
-    $scope.$apply();
-    console.log(resp.data);
-  }, function(err) {
-    console.error('ERR', err);
-    // err.status will contain the status code
-  })
-
-
-  $scope.lists1 = [];
-  $scope.items = {
-    //testing
-      name: 'item1',  
+  $stateProvider.state("home",
+  {
+    url: "/home",
+    views:
+    {
+      home:
+      {
+        templateUrl: "home.html"
+      }
     }
- 
+  });
 
-       $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal
-    })
-
-    $scope.openModal = function() {
-      $scope.modal.show()
+  $stateProvider.state("todos",
+  {
+    abstract: true,
+    url: "/todos",
+    views:
+    {
+      todos:
+      {
+        template: "<ion-nav-view></ion-nav-view>"
+      }
     }
+  });
 
-    $scope.closeModal = function() {
-      $scope.modal.hide();
+  $stateProvider.state("todos.index",
+  {
+    url: "",
+    templateUrl: "todos.html",
+    controller: "TodosCtrl"
+  });
+
+  $stateProvider.state("todos.detail",
+  {
+    url: "/:todo",
+    templateUrl: "todo.html",
+    controller: "TodoCtrl",
+    resolve:
+    {
+      todo: function($stateParams, TodosService)
+      {
+        return TodosService.getTodo($stateParams.todo);
+      }
+    }
+  });
+
+  $stateProvider.state("help",
+  {
+    url: "/help",
+    views:
+    {
+      help:
+      {
+        templateUrl: "help.html"
+      }
+    }
+  });
+});
+
+// Getting data from Api
+app.factory('TodosService', ['$http', function ($http) {
+    var promise = $http.get('http://skyhi.cloudapp.net:8000/todolist/_all_records');
+    var promise1 = $http.get('http://skyhi.cloudapp.net:8000/todo/_all_records');
+    return {
+        getlists: function (callback) {
+            promise.success(callback);
+        },
+        getitems: function (callback) {
+            promise1.success(callback);
+        },
+       getTodo: function(index) {
+      return todos[index];
+    }
     };
+}]);
 
-    $scope.$on('$destroy', function() {
-      $scope.modal.remove();
-    });
 
-  // Create and load the Modal
-  $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
-    $scope.taskModal = modal;
-  }, {
-    scope: $scope,
-    animation: 'slide-in-up'
+//Todolists Controller
+app.controller('TodosCtrl', ['$scope','TodosService',function($scope,TodosService,$http){
+ TodosService.getlists(function(data) {
+      $scope.todos = data;
+      $scope.apply;
+        todos=$scope.todos;
+      console.log('$scope.todos: %o', $scope.todos);    
+  });
+
+}]);
+
+
+
+//Todo Items Controller
+app.controller('TodoCtrl', ['$scope','TodosService',function($scope,TodosService,$http){
+ TodosService.getitems(function(data) {
+      $scope.items = data;
+      $scope.apply;
+      items=$scope.items;  
   });
 
 
-
-
-  // Posting new lists to json
-  // This is not working 
-  $scope.createTask = function(task) {
-    $scope.lists1.rows.push({
-     "id":2,"name":task.name,"description":"Description of todolist", "due_date":"1/1/2017","completed":false,"completed_date":null
-    });
-
-    var dataObj = [{
-       id:2, name:task.name,description:"Description of task", due_date:"1/1/2017",completed:false,completed_date:null
-       
-    }]
-
-    var res = $http.post('http://skyhi.cloudapp.net:8000/todolist', dataObj);
-    res.success(function(data, status, headers, config) {
-      $scope.message = data;
-    });
-    res.error(function(data, status, headers, config) {
-      alert( "failure message: " + JSON.stringify({data: data}));
-    }); 
-    $scope.taskModal.hide();
-   Lists.save($scope.lists1);
-
-    task.title = "";
-  
-  };
-
-
-
-  // Open our new task modal
-  $scope.newTask = function() {
-    $scope.taskModal.show();
-  };
-
-
-  // Close the new task modal
-  $scope.closeNewTask = function() {
-    $scope.taskModal.hide();
-  };
-
-
-});
-
-
+}]);
 
 

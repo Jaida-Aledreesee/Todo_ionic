@@ -16,13 +16,20 @@ angular.module('todo', ['ionic'])
     console.error('ERR', err);
     // err.status will contain the status code
   })
+// getting items
+    $http.get('http://skyhi.cloudapp.net:8000/todo/_all_records').then(function(resp) {
+    $scope.items = resp.data;
+    $scope.$apply();
+    console.log(resp.data);
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
+
 
 
   $scope.lists1 = [];
-  $scope.items = {
-    //testing
-      name: 'item1',  
-    }
+  $scope.items = [];
  
 
        $ionicModal.fromTemplateUrl('templates/contact-modal.html', {
@@ -80,6 +87,38 @@ angular.module('todo', ['ionic'])
     task.title = "";
   
   };
+
+
+    $scope.createTask1 = function(task1) {
+    $scope.tasks.rows.push({
+      "id": 5,
+      "todolistid": 1,
+      "name": task1.name
+      "description": "Description of task",
+      "due_date": "1/1/2017",
+      "completed": false,
+      "completed_date": null
+    });
+
+    var dataObj = [{
+       id:2,todolistid: 1, name:task1.name,description:"Description of task", due_date:"1/1/2017",completed:false,completed_date:null
+       
+    }]
+
+    var res = $http.post('ttp://skyhi.cloudapp.net:8000/todo/_all_records', dataObj);
+    res.success(function(data, status, headers, config) {
+      $scope.message = data;
+    });
+    res.error(function(data, status, headers, config) {
+      alert( "failure message: " + JSON.stringify({data: data}));
+    }); 
+    $scope.taskModal.hide();
+   Lists.save($scope.tasks);
+
+    task1.title = "";
+  
+  };
+
 
 
 

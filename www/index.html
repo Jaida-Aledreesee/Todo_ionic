@@ -59,7 +59,7 @@
       <ion-view title="Todos">
         <ion-content>
           <ion-list>
-            <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" ui-sref="todos.detail({ todo: $index })">
+            <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" ui-sref="todos.detail({ id: id })">
               <span ng-class="{done: todo.completed}">{{todo.name}} {{todo.completed}}</span>
             </ion-item>
           </ion-list>
@@ -73,8 +73,8 @@
       <ion-view title="Todo">
         <ion-content>
           <div class="item">
-           <div class="item item-text-wrap" ng-repeat="item in items.rows">
-            {{item.name}} 
+           <div class="item item-text-wrap">
+            {{items.name}} 
             </div>
           </div>
           </div>

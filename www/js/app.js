@@ -38,13 +38,14 @@ app.config(function($stateProvider, $urlRouterProvider)
 
   $stateProvider.state("todos.detail",
   {
-    url: "/:todo",
+    url: "/:id",
     templateUrl: "todo.html",
     controller: "TodoCtrl",
     resolve:
     {
-      todo: function($stateParams, TodosService)
+      id: function($stateParams, TodosService)
       {
+        
         return TodosService.getTodo($stateParams.todo);
       }
     }
@@ -74,8 +75,10 @@ app.factory('TodosService', ['$http', function ($http) {
         getitems: function (callback) {
             promise1.success(callback);
         },
-       getTodo: function(index) {
-      return todos[index];
+
+        // index is undefined 
+       getTodo: function(index) { 
+      return  console.log('index is', index);
     }
     };
 }]);
@@ -97,9 +100,9 @@ app.controller('TodosCtrl', ['$scope','TodosService',function($scope,TodosServic
 //Todo Items Controller
 app.controller('TodoCtrl', ['$scope','TodosService',function($scope,TodosService,$http){
  TodosService.getitems(function(data) {
-      $scope.items = data;
+      $scope.items = data.rows[0];
       $scope.apply;
-      items=$scope.items;  
+     console.log('data is %o', data.rows[0]); 
   });
 
 

@@ -93,9 +93,9 @@ app.factory('TodosService', ['$http', function ($http) {
                   promise1.success(callback);
                                       },
         // index is undefined 
-        getTodo: function(index) { 
-                                   id = index;
-                                   return  index;
+        getTodo: function(listid) { 
+                                   id = listid;
+                                   return  listid;
                                  }
     };
 }]);

@@ -45,8 +45,20 @@ app.config(function($stateProvider, $urlRouterProvider)
     {
       id: function($stateParams, TodosService)
       {
-        
-        return TodosService.getTodo($stateParams.todo);
+         
+        return TodosService.getTodo($stateParams.id);
+      }
+    }
+  });
+
+      $stateProvider.state("createlist",
+  {
+    url: "/createlist",
+    views:
+    {
+      createlist:
+      {
+        templateUrl: "createlist.html"
       }
     }
   });
@@ -67,31 +79,39 @@ app.config(function($stateProvider, $urlRouterProvider)
 // Getting data from Api
 app.factory('TodosService', ['$http', function ($http) {
     var promise = $http.get('http://skyhi.cloudapp.net:8000/todolist/_all_records');
-    var promise1 = $http.get('http://skyhi.cloudapp.net:8000/todo/_all_records');
+
+    var id 
+    
+  
     return {
         getlists: function (callback) {
-            promise.success(callback);
-        },
+                  promise.success(callback);
+                                      },
+         
         getitems: function (callback) {
-            promise1.success(callback);
-        },
-
+                  var promise1 = $http.get('http://skyhi.cloudapp.net:8000/todo/'+id);
+                  promise1.success(callback);
+                                      },
         // index is undefined 
-       getTodo: function(index) { 
-      return  console.log('index is', index);
-    }
+        getTodo: function(index) { 
+                                   id = index;
+                                   return  index;
+                                 }
     };
 }]);
 
 
 //Todolists Controller
-app.controller('TodosCtrl', ['$scope','TodosService',function($scope,TodosService,$http){
+app.controller('TodosCtrl', ['$scope','TodosService',function($scope,TodosService,$ionicModal,$http){
  TodosService.getlists(function(data) {
       $scope.todos = data;
-      $scope.apply;
+
         todos=$scope.todos;
-      console.log('$scope.todos: %o', $scope.todos);    
+      console.log('$scope.todos: %o', $scope.todos); 
+
   });
+
+
 
 }]);
 
@@ -99,10 +119,10 @@ app.controller('TodosCtrl', ['$scope','TodosService',function($scope,TodosServic
 
 //Todo Items Controller
 app.controller('TodoCtrl', ['$scope','TodosService',function($scope,TodosService,$http){
+
  TodosService.getitems(function(data) {
-      $scope.items = data.rows[0];
-      $scope.apply;
-     console.log('data is %o', data.rows[0]); 
+      $scope.items = data;
+     console.log('data is %o', data.rows); 
   });
 
 

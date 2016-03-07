@@ -15,7 +15,10 @@
   <head>
     <link data-require="ionic@1.0.0-beta13" data-semver="1.0.0-beta13" rel="stylesheet" href="http://code.ionicframework.com/1.0.0-beta.13/css/ionic.css"/>
     <script data-require="ionic@1.0.0-beta13" data-semver="1.0.0-beta13" src="http://code.ionicframework.com/1.0.0-beta.13/js/ionic.bundle.js"></script>
-
+.done
+{
+  text-decoration: line-through;
+}
   
   </head>
 
@@ -38,6 +41,9 @@
        <ion-tab icon="" ui-sref="createlist">
         <ion-nav-view name="createlist"></ion-nav-view>
       </ion-tab>
+         <ion-tab icon="" ui-sref="additem">
+        <ion-nav-view name="additem"></ion-nav-view>
+      </ion-tab>
     </ion-tabs>
 
 
@@ -55,21 +61,52 @@
 
     <script type="text/ng-template" id="createlist.html">
       <ion-view title="">
-        <ion-content padding="true">
-          <h2>Enter List Name</h2>
-           <label class="item item-input">
-            <input type="text" placeholder="List Name" >
+          <ion-content ng-controller="TodosCtrl">
+      <form ng-submit="createList(task)">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="List Name" ng-model="task.name">
           </label>
-        </ion-content>
+          </br>
+          <button class="button button-small">Add People</button>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-energized">Create List</button>
+        </div>
+      </form>
+
+    </ion-content>
       </ion-view>
     </script>
+
+
+     <script type="text/ng-template" id="additem.html">
+      <ion-view title="">
+          <ion-content ng-controller="TodoCtrl">
+      <form ng-submit="addTask(task)">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="item Name" ng-model="task.name">
+          </label>
+          </br>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-energized">Add item to the list</button>
+        </div>
+      </form>
+    </ion-content>
+      </ion-view>
+    </script>
+
+
 
     <script type="text/ng-template" id="todos.html">
       <ion-view title="Todos">
         <ion-content>
           <ion-list>
-            <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" ui-sref="todos.detail({ id: todo.id})">
-              <span ng-class="{done: todo.completed}">{{todo.name}} {{todo.completed}}</span>
+            <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" >
+              <span ng-class="{done: todo.completed}" ui-sref="todos.detail({ id: todo.id})">{{todo.name}} {{todo.id}} {{todo.completed}}</span>
+              <button ng-click="removeItem($index,todo.id)">remove</button>
             </ion-item>
             <button class="button button-full button-energized" ui-sref="createlist">
                Add A new list
@@ -83,9 +120,10 @@
       <ion-view title="Todo">
         <ion-content>
           <div class="item">
-           <div class="item item-text-wrap" ng-repeat="item in items.rows">
-            {{item.name}} 
+           <div class="item item-text-wrap" ng-repeat="task in tasks.rows">
+            {{task.name}} 
             </div>
+            <button class="button button-full button-energized" ui-sref="addtask">Add new task</button>
           </div>
           </div>
 

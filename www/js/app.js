@@ -18,6 +18,7 @@ uniqueNumber.previous = 0;
 function s4(){
   return uniqueNumber();
 };
+
 // Routes 
 
 app.config(function($stateProvider, $urlRouterProvider)
@@ -71,7 +72,7 @@ app.config(function($stateProvider, $urlRouterProvider)
     }
   });
 
-      $stateProvider.state("createlist",
+   $stateProvider.state("createlist",
   {
     url: "/createlist",
  
@@ -86,13 +87,13 @@ app.config(function($stateProvider, $urlRouterProvider)
 
   $stateProvider.state("addtask",
   {
-    url: "/additem",
+    url: "/addtask",
  
     views:
     {
       additem:
       {
-        templateUrl: "additem.html"
+        templateUrl: "addtask.html"
       }
     }
   });
@@ -111,7 +112,7 @@ app.config(function($stateProvider, $urlRouterProvider)
 });
 
 // Getting data from Api
-app.factory('TodosService', ['$http', function ($http) {
+app.factory('TodosService', ['$http', '$state',function ($http,$state) {
     var promise = $http.get('http://skyhi.cloudapp.net:8001/todolist/_all_records');
     var id 
   
@@ -129,9 +130,8 @@ app.factory('TodosService', ['$http', function ($http) {
                                    return  listid;
                                  },
         getListId: function() { 
-                                  
-                                   return  id;
-                                 },
+                                return  id;
+                              },
         postlist: function(dataObj) { 
                   var res = $http.post('http://skyhi.cloudapp.net:8001/todolist', dataObj);
                                  },
@@ -141,7 +141,10 @@ app.factory('TodosService', ['$http', function ($http) {
         deletelist: function(listid){
           $http.delete('http://skyhi.cloudapp.net:8001/todolist/'+listid);
 
-        }
+        },
+      changeState: function () {
+      $state.go('todo.detail', {id:id});
+      }
 
     };
 }]);
@@ -154,13 +157,9 @@ app.controller('TodosCtrl', ['$scope','TodosService','$http',function($scope,Tod
   
  TodosService.getlists(function(data) {
       $scope.todos = data;
+      todos=$scope.todos;
+    });
 
-        todos=$scope.todos;
-      console.log('$scope.todos: %o', $scope.todos); 
-
-
-  });
- //create new list
  $scope.removeItem = function (index,listid) {
   console.log('index is', index);
   console.log('list id is', listid); 
@@ -168,51 +167,40 @@ app.controller('TodosCtrl', ['$scope','TodosService','$http',function($scope,Tod
   TodosService.deletelist(listid);
 
  };
-
-
-    $scope.createList = function(task) {
+ //create new list
+ $scope.createList = function(task) {
    // generate random ids for each new list
  
- var id = 8;
-  console.log("listid fsknfkjs", id);
-
-    $scope.todos.rows.push({
-                             "id":id,"name":task.name,"description":"Description of todolist",
-                              "due_date":"1/1/2017","completed":false,"completed_date":null
+ var id = s4();
+ $scope.todos.rows.push({
+                             "id":id,
+                             "name":task.name,
+                             "description":"Description of todolist",
+                              "due_date":"1/1/2017",
+                              "completed":false,
+                              "completed_date":null
                           });
-       var dataObj = [{
-                    id:id, name:task.name,description:"Description of task", due_date:"1/1/2017"
-                    ,completed:true,completed_date:null     
+    var dataObj = [{
+                    id:id,
+                    name:task.name,
+                    description:"Description of task",
+                    due_date:"1/1/2017",
+                    completed:true,completed_date:null     
                   }]
     TodosService.postlist(dataObj);
-
-  
-                   console.log('http is ', $http); 
-   
-
-    task.title = "";
-  
+    task.title = "";  
   };
 }]);
 
-
-
 //Todo Items Controller
-app.controller('TodoCtrl', ['$scope','TodosService',function($scope,TodosService,$http){
-   
+app.controller('TodoCtrl', ['$scope','TodosService',function($scope,TodosService,$state){   
 var currentListID = TodosService.getListId();
-console.log("current list id = ", currentListID);
- TodosService.getitems(function(data) {
+TodosService.getitems(function(data) {
       $scope.tasks = data;
       items=$scope.items;      
   });
-
-    $scope.addTask = function(task) {
-
-
-   
+$scope.addTask = function(task) {  
     var id = s4();
-
     $scope.tasks.rows.push(
                              {
       "id": id,
@@ -235,8 +223,7 @@ console.log("current list id = ", currentListID);
                   }]
 
     TodosService.postitem(dataObj);
-   
-
+    TodosService.changeState();
     task.title = "";
   
   };

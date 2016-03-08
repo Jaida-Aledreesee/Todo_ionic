@@ -80,7 +80,7 @@
     </script>
 
 
-     <script type="text/ng-template" id="additem.html">
+     <script type="text/ng-template" id="addtask.html">
       <ion-view title="">
           <ion-content ng-controller="TodoCtrl">
       <form ng-submit="addTask(task)">
@@ -91,7 +91,7 @@
           </br>
         </div>
         <div class="padding">
-          <button type="submit" class="button button-block button-energized">Add item to the list</button>
+          <button type="submit" class="button button-block button-energized"  >Add item to the list</button>
         </div>
       </form>
     </ion-content>
@@ -105,7 +105,8 @@
         <ion-content>
           <ion-list>
             <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" >
-              <span ng-class="{done: todo.completed}" ui-sref="todos.detail({ id: todo.id})">{{todo.name}} {{todo.id}} {{todo.completed}}</span>
+              <span ng-class="{done: todo.completed}" ui-sref="todos.detail({ id: todo.id})">
+              {{todo.name}} </span>
               <button ng-click="removeItem($index,todo.id)">remove</button>
             </ion-item>
             <button class="button button-full button-energized" ui-sref="createlist">

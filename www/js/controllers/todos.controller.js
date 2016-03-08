@@ -1,5 +1,5 @@
 //Todolists Controller
-app.controller('TodosCtrl', ['$scope','TodosService','$http',function($scope,TodosService,$http){
+app.controller('TodosCtrl', ['$scope','TodosService','$http','$ionicHistory',function($scope,TodosService,$http,$ionicHistory){
 
 
     TodosService.getlists(function(data) {
@@ -36,6 +36,8 @@ app.controller('TodosCtrl', ['$scope','TodosService','$http',function($scope,Tod
         }]
         TodosService.postlist(dataObj);
         task.title = "";
+        $ionicHistory.goBack(-1);
+
     };
 }]);
 

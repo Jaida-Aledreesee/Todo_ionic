@@ -1,0 +1,15 @@
+    <ion-view title="" cache-view="false">
+        <ion-content ng-controller="TodoCtrl">
+            <form ng-submit="addTask(task)">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="text" placeholder="item Name" ng-model="task.name">
+                    </label>
+                    </br>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-energized"  >Add item to the list</button>
+                </div>
+            </form>
+        </ion-content>
+    </ion-view>

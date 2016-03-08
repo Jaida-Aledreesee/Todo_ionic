@@ -1,0 +1,19 @@
+    <ion-view title="Todo" cache-view="false">
+        <ion-content>
+            <div class="item">
+                <div class="item item-text-wrap" ng-repeat="task in tasks.rows">
+                    {{task.name}}
+                </div>
+                <button class="button button-full button-energized" ui-sref="todos.addtask">Add new task</button>
+            </div>
+
+            <div class="item item-checkbox">
+                <div>
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="todo.completed">
+                    </label>
+                </div>
+            </div>
+        </ion-content>
+    </ion-view>
+

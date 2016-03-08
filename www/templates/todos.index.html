@@ -1,0 +1,18 @@
+
+    <ion-view title="Todos" cache-view="false">
+        <ion-content>
+            <ion-list>
+                <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" href="#/todos/detail/{{todo.id}}">
+              <span ng-class="{done: todo.completed}" >
+              {{todo.name}} </span>
+                    <button ng-click="removeItem($index,todo.id)">remove</button>
+                </ion-item>
+                <button class="button button-full button-energized" ui-sref="todos.createlist">
+                    Add A new list
+                </button>
+            </ion-list>
+        </ion-content>
+
+    </ion-view>
+
+

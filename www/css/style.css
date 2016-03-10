@@ -1,5 +1,5 @@
 /* Empty. Add your own CSS if you like */
-    body
+body
 {
   cursor: url("http://ionicframework.com/img/finger.png"), auto;
 }
@@ -7,4 +7,12 @@
 .done
 {
   text-decoration: line-through;
+}
+
+.background, .background .pane, .background .item, .background .item-complex .item-content {
+    background-color: #f1f2f3;
+    background-image: radial-gradient(
+            white,
+            #f0f0f0
+    );
 }

@@ -1,15 +1,37 @@
 
     <ion-view title="Todos" cache-view="false">
+        <ion-nav-buttons side="right">
+            <button class="button" ui-sref="todos.createlist">
+                <i class="ion-plus-round"></i>
+            </button>
+        </ion-nav-buttons>
         <ion-content>
-            <ion-list>
+            <!--<ion-toggle ng-model="shouldShowDelete">
+                Edit
+            </ion-toggle>-->
+            <ion-list can-swipe="true"  show-delete="false"
+                      show-reorder="false">
+
                 <ion-item ng-repeat="todo in todos.rows" class="item item-icon-right" href="#/todos/detail/{{todo.id}}">
-              <span ng-class="{done: todo.completed}" >
-              {{todo.name}} </span>
-                    <button ng-click="removeItem($index,todo.id)">remove</button>
+
+              {{todo.name}}
+
+                    <ion-option-button class="button-positive"
+                                       ng-click="share(item)">
+                       Share
+                    </ion-option-button>
+
+                    <ion-option-button class="button-assertive"
+                                       ng-click="removeItem($index,todo.id)">
+                        Remove
+                    </ion-option-button>
+
+                    <!--
+                    <ion-option-button class="button-light icon ion-heart"></ion-option-button>
+                    <ion-option-button class="button-light icon ion-email"></ion-option-button>
+                    <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>-->
                 </ion-item>
-                <button class="button button-full button-energized" ui-sref="todos.createlist">
-                    Add A new list
-                </button>
+
             </ion-list>
         </ion-content>
 

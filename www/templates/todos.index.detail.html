@@ -1,19 +1,37 @@
     <ion-view title="Todo" cache-view="false">
+        <ion-nav-buttons side="right">
+            <button class="button" ui-sref="todos.addtask">
+                <i class="ion-plus-round"></i>
+            </button>
+        </ion-nav-buttons>
         <ion-content>
-            <div class="item">
-                <div class="item item-text-wrap" ng-repeat="task in tasks.rows">
-                    {{task.name}}
-                </div>
-                <button class="button button-full button-energized" ui-sref="todos.addtask">Add new task</button>
-            </div>
 
-            <div class="item item-checkbox">
+            <ion-list can-swipe="true"  show-delete="false"
+                      show-reorder="false">
+                <ion-item ng-repeat="task in tasks.rows" class="item item-icon-right">
+                    {{task.name}}
+
+                    <ion-option-button class="button-positive"
+                                       ng-click="done(task)">
+                        Done
+                    </ion-option-button>
+
+                    <ion-option-button class="button-assertive"
+                                       ng-click="removeItem($index,task)">
+                        Remove
+                    </ion-option-button>
+
+                </ion-item>
+            </ion-list>
+
+            <!--<div class="item item-checkbox">
                 <div>
                     <label class="checkbox">
                         <input type="checkbox" ng-model="todo.completed">
                     </label>
                 </div>
-            </div>
+            </div>-->
+
         </ion-content>
     </ion-view>
 

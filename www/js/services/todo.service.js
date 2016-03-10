@@ -3,8 +3,13 @@
  */
 // Getting data from Api
 app.factory('TodosService', ['$http', '$state',function ($http,$state) {
-    var promise = $http.get('http://skyhi.cloudapp.net:8001/todolist/_all_records');
-    var id
+    var baseUrl = 'http://skyhi.cloudapp.net:8001/';
+
+    //var baseUrl = 'http://192.168.204.134:8001/';
+
+
+    var promise = $http.get(baseUrl + 'todolist/_all_records');
+    var id;
 
     return {
 
@@ -14,7 +19,7 @@ app.factory('TodosService', ['$http', '$state',function ($http,$state) {
         },
 
         getitems: function (callback) {
-            var promise1 = $http.get('http://skyhi.cloudapp.net:8001/todo/list/'+id);
+            var promise1 = $http.get(baseUrl + 'todo/list/'+id);
             promise1.success(callback);
         },
         getTodo: function(listid) {
@@ -25,13 +30,13 @@ app.factory('TodosService', ['$http', '$state',function ($http,$state) {
             return  id;
         },
         postlist: function(dataObj) {
-            var res = $http.post('http://skyhi.cloudapp.net:8001/todolist', dataObj);
+            var res = $http.post(baseUrl + 'todolist', dataObj);
         },
         postitem: function(dataObj) {
-            var res = $http.post('http://skyhi.cloudapp.net:8001/todo', dataObj);
+            var res = $http.post(baseUrl + 'todo', dataObj);
         },
         deletelist: function(listid){
-            $http.delete('http://skyhi.cloudapp.net:8001/todolist/'+listid);
+            $http.delete(baseUrl + 'todolist/'+listid);
 
         },
         changeState: function () {

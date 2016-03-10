@@ -1,15 +1,15 @@
     <ion-view title="" cache-view="false">
         <ion-content ng-controller="TodosCtrl">
             <form ng-submit="createList(task)">
-                <div class="list">
+
                     <label class="item item-input">
+
                         <input type="text" placeholder="List Name" ng-model="task.name">
                     </label>
-                    </br>
-                    <button class="button button-small">Add People</button>
-                </div>
+
+
                 <div class="padding">
-                    <button type="submit" class="button button-block button-energized">Create List</button>
+                    <button type="submit" class="button button-block button-energized">Add List</button>
                 </div>
             </form>
 

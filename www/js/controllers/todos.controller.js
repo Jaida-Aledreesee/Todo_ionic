@@ -14,26 +14,32 @@ app.controller('TodosCtrl', ['$scope','TodosService','$http','$ionicHistory',fun
         TodosService.deletelist(listid);
 
     };
+    $scope.share = function(todo){
+
+    };
+
     //create new list
     $scope.createList = function(task) {
         // generate random ids for each new list
 
         var id = s4();
-        $scope.todos.rows.push({
+      /*  $scope.todos.rows.push({
             "id":id,
             "name":task.name,
             "description":"Description of todolist",
             "due_date":"1/1/2017",
             "completed":false,
             "completed_date":null
-        });
+        });*/
+
         var dataObj = [{
             id:id,
             name:task.name,
             description:"Description of task",
             due_date:"1/1/2017",
             completed:true,completed_date:null
-        }]
+        }];
+
         TodosService.postlist(dataObj);
         task.title = "";
         $ionicHistory.goBack(-1);

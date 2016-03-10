@@ -8,7 +8,7 @@
 
             <ion-list can-swipe="true"  show-delete="false"
                       show-reorder="false">
-                <ion-item ng-repeat="task in tasks.rows" class="item item-icon-right">
+                <ion-item ng-repeat="task in tasks.rows" class="item item-trns ">
                     {{task.name}}
 
                     <ion-option-button class="button-positive"
@@ -17,7 +17,7 @@
                     </ion-option-button>
 
                     <ion-option-button class="button-assertive"
-                                       ng-click="removeItem($index,task)">
+                                       ng-click="removeItem($index,task.id)">
                         Remove
                     </ion-option-button>
 

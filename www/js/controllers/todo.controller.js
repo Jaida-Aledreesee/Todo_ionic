@@ -9,9 +9,17 @@ app.controller('TodoCtrl', ['$scope','TodosService','$state','$ionicHistory',fun
         $scope.tasks = data;
         items=$scope.items;
     });
+       $scope.removeItem = function (index,taskId) {
+        console.log('index is', index);
+        console.log('task id is', taskId);
+        $scope.tasks.rows.splice(index, 1);
+        TodosService.deleteTask(taskId);
+
+    };
+
     $scope.addTask = function(task) {
         var id = s4();
-        $scope.tasks.rows.push(
+       /* $scope.tasks.rows.push(
             {
                 "id": id,
                 "todolistid": parseInt(currentListID),
@@ -21,7 +29,7 @@ app.controller('TodoCtrl', ['$scope','TodosService','$state','$ionicHistory',fun
                 "completed": "false",
                 "completed_date": "null"
 
-            });
+            });*/
         var dataObj = [{
             id:id,
             todolistid:parseInt(currentListID),
@@ -31,7 +39,7 @@ app.controller('TodoCtrl', ['$scope','TodosService','$state','$ionicHistory',fun
             ,completed:false,
             completed_date:null
         }]
-
+ 
         TodosService.postitem(dataObj);
        // TodosService.changeState();
 

@@ -9,14 +9,21 @@ body
   text-decoration: line-through;
 }
 
+    .bar.bar-positive,.tabs{
+      background-color: rgba(74,192,241,.30) !important;
+    }
 
 .background, .background .pane, .background .item, .background .item-complex .item-content {
     background-color: #f1f2f3;
     -webkit-filter: blur(1px), opacity(1%);
-
     background-image: url("../img/bg1.jpg"),
 radial-gradient(
 white,
 #00eff0
 );
+}
+
+.item.item-trns {
+	border-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);	
 }

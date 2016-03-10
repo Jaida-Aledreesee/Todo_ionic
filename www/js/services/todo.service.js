@@ -39,6 +39,10 @@ app.factory('TodosService', ['$http', '$state',function ($http,$state) {
             $http.delete(baseUrl + 'todolist/'+listid);
 
         },
+        deleteTask: function(todoid){
+            $http.delete(baseUrl + 'todo/'+todoid);
+
+        },
         changeState: function () {
             $state.go('todo.detail', {id:id});
         }

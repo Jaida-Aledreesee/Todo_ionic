@@ -9,10 +9,14 @@ body
   text-decoration: line-through;
 }
 
+
 .background, .background .pane, .background .item, .background .item-complex .item-content {
     background-color: #f1f2f3;
-    background-image: radial-gradient(
-            white,
-            #f0f0f0
-    );
+    -webkit-filter: blur(1px), opacity(1%);
+
+    background-image: url("../img/bg1.jpg"),
+radial-gradient(
+white,
+#00eff0
+);
 }

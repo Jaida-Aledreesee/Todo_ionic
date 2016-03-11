@@ -9,10 +9,10 @@
             <ion-list can-swipe="true"  show-delete="false"
                       show-reorder="false">
                 <ion-item ng-repeat="task in tasks.rows" class="item item-trns ">
-                    {{task.name}}
+                    <span ng-class="{done: task.completed}">{{task.name}}</span>
 
                     <ion-option-button class="button-positive"
-                                       ng-click="done(task)">
+                                       ng-click="doneTask(task.completed,task.id,task.name)">
                         Done
                     </ion-option-button>
 

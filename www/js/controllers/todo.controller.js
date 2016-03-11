@@ -48,5 +48,33 @@ app.controller('TodoCtrl', ['$scope','TodosService','$state','$ionicHistory',fun
 
 
     };
+    $scope.doneTask = function(completed, taskId, taskName){
+       if (completed== false)
+          {
+                completed =true;
+          }
+        else
+        {
+                 completed=false;
+                     }
+        var dataObj = [{
+            id:taskId,
+            todolistid:parseInt(currentListID),
+            name:taskName,
+            description:"Description of task",
+            due_date:"1/1/2017"
+            ,completed:completed,
+            completed_date:null
+        }]
+        console.log("completed",completed);
+
+        TodosService.postitem(dataObj);
+        TodosService.getitems(function(data) {
+        $scope.tasks = data;
+        items=$scope.items;
+        });
+
+
+    }
 
 }]);

@@ -1,16 +1,26 @@
 
     <ion-view title="Todos" id="snow" cache-view="false">
         <ion-nav-buttons side="right">
-            <button class="button" ui-sref="todos.createlist">
+           <!-- <button class="button button-calm" ui-sref="todos.createlist">
                 <i class="ion-plus-round"></i>
-            </button>
+            </button>-->
         </ion-nav-buttons>
         <ion-content>
             <!--<ion-toggle ng-model="shouldShowDelete">
                 Edit
             </ion-toggle>-->
+                <form ng-submit="createList(task)">
+                    <div class="item item-input-inset">
+                     <label class="item-input-wrapper">
+                      <input type="text" placeholder="List Name" ng-model="task.name" class="textbox">
+                    </label>
+                    <button type="submit" class="button button-small button-calm">Add List</button>
+                </div>
+                
+            </form>
             <ion-list can-swipe="true"  show-delete="false"
                       show-reorder="false">
+            
 
                 <ion-item ng-repeat="todo in todos.rows" class="item item-trns "  href="#/todos/detail/{{todo.id}}">
 
@@ -33,6 +43,7 @@
                 </ion-item>
 
             </ion-list>
+
         </ion-content>
 
     </ion-view>

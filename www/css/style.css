@@ -18,7 +18,7 @@ body
     background-color: #f1f2f3;
     -webkit-filter: blur(1px), opacity(1%);
     background-image: url("../img/bg1.jpg"),
-radial-gradient(
+  radial-gradient(
 white,
 #00eff0
 );
@@ -26,7 +26,8 @@ white,
 
 .item.item-trns {
 	border-color: rgba(0, 0, 0, 0);
-	background-color: rgba(0, 0, 0, 0);	
+	background-color: rgba(0, 0, 0, 0);
+
 }
 
 #snow{
@@ -68,3 +69,5 @@ white,
  background:url('https://gauntletsofallahswt.files.wordpress.com/2015/12/winter_forest_mountain_snow_moon_nature_hd-wallpaper-562096-snow1.gif') no-repeat;
  background-size: cover;
 }
+
+

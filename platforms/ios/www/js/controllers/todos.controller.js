@@ -1,6 +1,6 @@
 //Todolists Controller
 app.controller('TodosCtrl', ['$scope','TodosService','$http','$ionicHistory',function($scope,TodosService,$http,$ionicHistory){
-
+$scope.todos=[];
 
     TodosService.getlists(function(data) {
         $scope.todos = data;
@@ -22,15 +22,15 @@ app.controller('TodosCtrl', ['$scope','TodosService','$http','$ionicHistory',fun
     $scope.createList = function(task) {
         // generate random ids for each new list
 
-        var id = s4();
-      /*  $scope.todos.rows.push({
+       var id = s4();
+        $scope.todos.rows.push({
             "id":id,
             "name":task.name,
             "description":"Description of todolist",
             "due_date":"1/1/2017",
-            "completed":false,
+            "completed":true,
             "completed_date":null
-        });*/
+        });
 
         var dataObj = [{
             id:id,

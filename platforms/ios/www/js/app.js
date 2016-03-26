@@ -2,15 +2,23 @@ var app = angular.module("ionicApp", ["ionic"]);
 
 // Routes
 app.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/todos/index");
+    $urlRouterProvider.otherwise('/signin')
 
     $stateProvider
+        .state("signin",
+        {
+            url: "/signin",    
+            templateUrl: "/templates/signin.html"
+                
+            }
+        )
         .state("todos",
         {
             abstract: true,
             url: "/todos",
             templateUrl: 'templates/todos.html'
         })
+
         .state("todos.home",
         {
             cache: false,
@@ -21,6 +29,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+  
         .state("todos.index",
         {
             cache: false,

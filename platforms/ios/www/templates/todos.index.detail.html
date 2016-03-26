@@ -1,10 +1,20 @@
     <ion-view title="Todo" cache-view="false">
         <ion-nav-buttons side="right">
-            <button class="button" ui-sref="todos.addtask">
+          <!--  <button class="button" ui-sref="todos.addtask">
                 <i class="ion-plus-round"></i>
-            </button>
+            </button>-->
         </ion-nav-buttons>
         <ion-content>
+            <form ng-submit="addTask(task)">
+                    <div class="item item-input-inset">
+                     <label class="item-input-wrapper">
+                      <input type="text" placeholder="item name" ng-model="task.name" class="textbox">
+                    </label>
+                    <button type="submit" class="button button-small button-calm">Add item</button>
+                </div>
+                
+            </form>
+
 
             <ion-list can-swipe="true"  show-delete="false"
                       show-reorder="false">

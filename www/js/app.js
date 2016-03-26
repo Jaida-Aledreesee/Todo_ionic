@@ -2,15 +2,17 @@ var app = angular.module("ionicApp", ["ionic"]);
 
 // Routes
 app.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/signin')
 
     $stateProvider
         .state("signin",
         {
             url: "/signin",    
-            templateUrl: "/templates/signin.html"
-                
+            views:{
+                'mainview':{
+                    templateUrl: "templates/signin.html"
+                }
             }
+        }
         )
         .state("todos",
         {
@@ -87,6 +89,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         });
+
+    $urlRouterProvider.otherwise('/signin')
+
+
 });
 
 

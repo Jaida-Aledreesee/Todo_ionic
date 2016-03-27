@@ -12,6 +12,7 @@ body
     .bar.bar-positive,.tabs{
       background-color: rgba(74,192,241,.30) !important;
     }
+
 .date{ font-size: 11px;}
 
 .background, .background .pane, .background .item, .background .item-complex .item-content {

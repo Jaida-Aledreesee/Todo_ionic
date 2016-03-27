@@ -1,17 +1,21 @@
-var app = angular.module("ionicApp", ["ionic"]);
+var app = angular.module("ionicApp", ["ionic",'ngCordova','ngCordovaOauth','ui.router']);
 
 // Routes
 app.config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/signin')
 
     $stateProvider
         .state("signin",
         {
-            url: "/signin",    
-            views:{
+            url: "/signin",
+            templateUrl: "templates/signin.html",
+            controller: "LoginCtrl"
+            /*views:{
                 'mainview':{
-                    templateUrl: "templates/signin.html"
+                    templateUrl: "templates/signin.html",
+                    controller: "LoginCtrl"
                 }
-            }
+            }*/
         }
         )
         .state("todos",
@@ -27,7 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: "/home",
             views: {
                 'todos-home': {
-                    templateUrl: "/templates/todos.home.html"
+                    templateUrl: "templates/todos.home.html"
                 }
             }
         })
@@ -36,6 +40,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         {
             cache: false,
             url: "/index",
+            //templateUrl: "templates/todos.index.html",
             views: {
                 'todos-index': {
                     templateUrl: "templates/todos.index.html",
@@ -90,7 +95,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         });
 
-    $urlRouterProvider.otherwise('/signin')
+
+
+
 
 
 });

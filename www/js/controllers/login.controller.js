@@ -5,29 +5,6 @@ app.controller("LoginCtrl", ['$scope','$cordovaOauth','$state','$location','$roo
     if(!window.cordova) {
         $scope.msg = "Debug mode - will not authenticate. Use simulator for actual login";
     }
-    $scope.imgurLogin = function() {
-        $cordovaOauth.imgur("CLIENT_ID_HERE").then(function(result) {
-            console.log(JSON.stringify(result));
-        }, function(error) {
-            console.log(JSON.stringify(error));
-        });
-    };
-
-    $scope.twitterLogin = function() {
-        $cordovaOauth.twitter("CLIENT_ID_HERE", "CLIENT_SECRET_HERE").then(function(result) {
-            console.log(JSON.stringify(result));
-        }, function(error) {
-            console.log(JSON.stringify(error));
-        });
-    };
-
-    $scope.facebookLogin = function() {
-        $cordovaOauth.facebook("CLIENT_ID_HERE", ["email"], {"auth_type": "rerequest"}).then(function(result) {
-            console.log(JSON.stringify(result));
-        }, function(error) {
-            console.log(JSON.stringify(error));
-        });
-    };
 
     $scope.googleLogin = function() {
 

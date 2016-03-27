@@ -18,7 +18,7 @@ body
 .background, .background .pane, .background .item, .background .item-complex .item-content {
     background-color: #f1f2f3;
     -webkit-filter: blur(1px), opacity(1%);
-    background-image: url("../img/bg1.jpg"),
+    background-image: url("../img/bg1.jpg");
   radial-gradient(
 white,
 #00eff0
@@ -66,9 +66,6 @@ white,
   50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
   100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
 } 
-#na{
- background:url('https://gauntletsofallahswt.files.wordpress.com/2015/12/winter_forest_mountain_snow_moon_nature_hd-wallpaper-562096-snow1.gif') no-repeat;
- background-size: cover;
-}
+
 
 

@@ -3,7 +3,7 @@
  */
 // Getting data from Api
 app.factory('TodosService', ['$http', '$state',function ($http,$state) {
-    var baseUrl = 'http://skyhi.cloudapp.net:8001/';
+    var baseUrl = 'http://skyhi.cloudapp.net:8002/';
 
     //var baseUrl = 'http://192.168.204.134:8001/';
 
@@ -34,6 +34,9 @@ app.factory('TodosService', ['$http', '$state',function ($http,$state) {
         },
         postitem: function(dataObj) {
             var res = $http.post(baseUrl + 'todo', dataObj);
+        },
+        postUsergroup: function(dataObj2) {
+            var res = $http.post(baseUrl + 'usergroup', dataObj2);
         },
         deletelist: function(listid){
             $http.delete(baseUrl + 'todolist/'+listid);

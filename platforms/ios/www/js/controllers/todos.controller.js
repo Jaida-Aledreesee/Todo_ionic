@@ -25,19 +25,24 @@ $scope.todos=[];
        var id = s4();
         $scope.todos.rows.push({
             "id":id,
+            "todolistid":"",
+            "groupid":"1",
             "name":task.name,
             "description":"Description of todolist",
             "due_date":"1/1/2017",
-            "completed":true,
+            "completed":"true",
             "completed_date":null
         });
 
         var dataObj = [{
-            id:id,
+           id:id,
+            todolistid:"",
+            groupid:"1",
             name:task.name,
-            description:"Description of task",
+            description:"Description of todolist",
             due_date:"1/1/2017",
-            completed:true,completed_date:null
+            completed:"true",
+            completed_date:null
         }];
 
         TodosService.postlist(dataObj);

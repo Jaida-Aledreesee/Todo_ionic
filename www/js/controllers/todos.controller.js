@@ -1,6 +1,7 @@
 //Todolists Controller
 app.controller('TodosCtrl', ['$scope','TodosService','$http','$ionicHistory',function($scope,TodosService,$http,$ionicHistory){
 $scope.todos=[];
+const userid1= "1234";
 
     TodosService.getlists(function(data) {
         $scope.todos = data;
@@ -25,6 +26,8 @@ $scope.todos=[];
        var id = s4();
         $scope.todos.rows.push({
             "id":id,
+            "todolistid":"",
+            "groupid":"3",
             "name":task.name,
             "description":"Description of todolist",
             "due_date":"1/1/2017",
@@ -34,13 +37,22 @@ $scope.todos=[];
 
         var dataObj = [{
             id:id,
+            todolistid:"",
+            groupid:"3",
             name:task.name,
             description:"Description of task",
             due_date:"1/1/2017",
             completed:true,completed_date:null
         }];
 
+        var dataObj2 = [{
+            userid:userid1,
+            groupid:"3"
+        }];
+
+
         TodosService.postlist(dataObj);
+        TodosService.postUsergroup(dataObj2);
         task.title = "";
         $ionicHistory.goBack(-1);
 

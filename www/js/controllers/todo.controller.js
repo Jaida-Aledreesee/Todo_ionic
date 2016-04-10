@@ -36,8 +36,9 @@ app.controller('TodoCtrl', ['$scope','TodosService','$state','$ionicHistory',fun
             name:task.name,
             description:"Description of task",
             due_date:"1/1/2017"
-            ,completed:false,
-            completed_date:null
+            ,completed:"false",
+            completed_date:null,
+            completed_by:"userid"
         }]
  
         TodosService.postitem(dataObj);

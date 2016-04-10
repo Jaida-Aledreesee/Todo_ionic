@@ -15,7 +15,16 @@ const userid1= "1234";
         TodosService.deletelist(listid);
 
     };
-    $scope.share = function(todo){
+
+    $scope.share = function(groupid1){
+        console.log("groupid is", groupid1);
+        var shareduser = s4();
+        var dataObj2 = [{
+            userid:shareduser,
+            groupid:groupid1
+        }];
+
+        TodosService.postUsergroup(dataObj2);
 
     };
 
